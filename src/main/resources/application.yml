@@ -1,0 +1,34 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: API-GATEWAY
+  cloud:
+    gateway:
+      routes:
+        - id: account-service
+          uri: lb://ACCOUNT-MGT-SERVICE
+          predicates:
+            - Path=/account/**, /accounts/**, /customer/**, /customers/**
+        - id: transaction-service
+          uri: lb://TRANSACTION-MGT-SERVICE
+          predicates:
+            - Path=/transaction/**
+        - id: mortgage-service
+          uri: lb://MORTGAGE-MGT-SERVICE
+          predicates:
+            - Path=/api/mortgage/**
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
