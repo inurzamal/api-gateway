@@ -11,14 +11,27 @@ spring:
           uri: lb://ACCOUNT-MGT-SERVICE
           predicates:
             - Path=/account/**, /accounts/**, /customer/**, /customers/**
+          filters:
+            - name: AuthenticationFilter
+
         - id: transaction-service
           uri: lb://TRANSACTION-MGT-SERVICE
           predicates:
             - Path=/transaction/**
+          filters:
+            - name: AuthenticationFilter
+
         - id: mortgage-service
           uri: lb://MORTGAGE-MGT-SERVICE
           predicates:
             - Path=/api/mortgage/**
+          filters:
+            - name: AuthenticationFilter
+
+        - id: authentication-service
+          uri: lb://AUTHENTICATION-SERVICE
+          predicates:
+            - Path=/auth/**
 
 eureka:
   client:
