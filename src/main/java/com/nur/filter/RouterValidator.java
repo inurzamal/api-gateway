@@ -10,7 +10,7 @@ import java.util.function.Predicate;
 public class RouterValidator {
 
     public static final List<String> openAPiEndPoints =
-            List.of("/auth/register", "/auth/authenticate", "/eureka");
+            List.of("/auth/register", "/auth/token", "/eureka");
 
     public Predicate<ServerHttpRequest> isSecured =
             serverHttpRequest -> openAPiEndPoints.stream()
